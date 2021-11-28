@@ -1,0 +1,34 @@
+﻿@model List<ManageUserModel>
+
+@{
+    ViewData["Title"] = "Administrador de Usuarios";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Email</td>
+            <td>Rol</td>
+        </tr>
+    </thead>
+
+    @foreach (var manageUserModel in Model)
+    {
+        <tr>
+            <td>@manageUserModel.user.Email</td>
+            @if (manageUserModel.role.Name == "Administrator")
+            {
+                <td>Administrador</td>
+            }
+            else
+            {
+                <td>Usuario sin privilegios</td>
+            }
+            <td>
+                <a asp-action="Edit" asp-route-id="@manageUserModel.user.Id">Editar</a>
+            </td>
+        </tr>
+    }
+</table>

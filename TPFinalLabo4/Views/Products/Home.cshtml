@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TPFinalLabo4.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos Favoritos</h1>
+
+
+<div class="d-inline-flex p-2 bd-highlight justify-content-between flex-wrap" style="width:100%">
+
+    @foreach (var item in Model)
+    {
+        @if (!string.IsNullOrEmpty(@item.Photo))
+        {
+            <div class="card m-2" style="width: 16rem">
+                <div class="d-flex align-items-center" style="height:280px">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="/images/products/@item.Photo" alt="@item.Name" class="card-img-top" style="max-height:400px" asp-append-version="true" />
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">"@item.Name"</h5>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Detalles</a>
+                </div>
+            </div>
+        }
+    }
+
+</div>

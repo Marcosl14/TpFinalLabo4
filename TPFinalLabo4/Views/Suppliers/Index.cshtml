@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TPFinalLabo4.Models.Supplier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Proveedores</h1>
+
+@if (User.IsInRole("Administrator") || User.IsInRole("Everyone"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Crear Nuevo Proveedor</a>
+    </p>
+}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.Adress)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th class="text-center" style="width:120px"> Acciones </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Everyone"))
+                {
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none">
+                            <span style="font-size: 1.5em; color: darkgoldenrod;">
+                                <i class="fal fa-edit"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">
+                            <span style="font-size: 1.5em; color: darkblue;">
+                                <i class="fal fa-info-circle"></i>
+                            </span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-decoration-none">
+                            <span style="font-size: 1.5em; color: darkred;">
+                                <i class="fal fa-trash-alt"></i>
+                            </span>
+                        </a>
+                    </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
